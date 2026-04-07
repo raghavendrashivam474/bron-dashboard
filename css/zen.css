@@ -1,0 +1,47 @@
+.zen-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 60vh;
+}
+
+.breathe-circle {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(217, 119, 67, 0.4) 0%, rgba(43, 34, 29, 0.8) 100%);
+    box-shadow: 0 0 50px rgba(217, 119, 67, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--accent-color);
+    transition: transform 4s linear;
+}
+
+.breathe-text {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.zen-controls {
+    margin-top: 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.zen-message {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    max-width: 400px;
+    text-align: center;
+    line-height: 1.6;
+}
+
+/* Animations managed mostly by JS to sync perfectly with intervals, but we define scale classes here if needed, or inline transform in JS */

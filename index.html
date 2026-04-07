@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bron Dashboard</title>
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/notes.css">
+    <link rel="stylesheet" href="css/timer.css">
+    <link rel="stylesheet" href="css/tasks.css">
+    <link rel="stylesheet" href="css/habits.css">
+    <link rel="stylesheet" href="css/sounds.css">
+    <link rel="stylesheet" href="css/zen.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <button id="global-back-btn" title="Back to Hub (ESC)">←</button>
+    <div class="app-container">
+        <!-- Zero-nav paradigm: No sidebar anymore. The entire interface is layered planes. -->
+        <main class="main-content">
+            <!-- Bento Dashboard View -->
+            <section id="dashboard-view" class="view-section active">
+                <header class="view-header" style="margin-bottom: 2rem;">
+                    <div class="header-text">
+                        <h1 id="greeting-text">Good Evening.</h1>
+                        <p>Your centralized command center.</p>
+                    </div>
+                </header>
+                <div class="dashboard-bento" id="master-bento"></div>
+            </section>
+
+            <!-- Notes View -->
+            <section id="notes-view" class="view-section">
+                <header class="view-header">
+                    <div class="header-text">
+                        <h1>Quick Notes</h1>
+                    </div>
+                    <div class="search-container">
+                        <input type="text" id="search-input" placeholder="🔍 Search notes...">
+                    </div>
+                    <div class="header-actions">
+                        <span id="save-status"></span>
+                        <button id="add-note-btn" class="btn btn-primary">+ New Note</button>
+                    </div>
+                </header>
+                <div id="notes-grid" class="notes-masonry"></div>
+            </section>
+
+            <!-- Timer View -->
+            <section id="timer-view" class="view-section">
+                <header class="view-header">
+                    <div class="header-text">
+                        <h1>Focus Timer</h1>
+                    </div>
+                </header>
+                <div id="timer-container" class="timer-container">
+                    <svg class="progress-ring" width="240" height="240">
+                        <circle class="progress-ring__circle_bg" stroke-width="8" fill="transparent" r="110" cx="120" cy="120"/>
+                        <circle class="progress-ring__circle" stroke-width="8" fill="transparent" r="110" cx="120" cy="120"/>
+                    </svg>
+                    <div class="timer-display" id="time-display">25:00</div>
+                    <div class="timer-controls">
+                        <button id="timer-start-btn" class="btn btn-primary">Start</button>
+                        <button id="timer-reset-btn" class="btn btn-secondary">Reset</button>
+                        <button id="timer-mode-btn" class="btn btn-secondary" title="Switch to Rest (5m)">☕ Rest Mode</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tasks View -->
+            <section id="tasks-view" class="view-section">
+                <header class="view-header">
+                    <div class="header-text">
+                        <h1>Task Manager</h1>
+                    </div>
+                    <div class="header-actions">
+                        <button id="clear-tasks-btn" class="btn btn-secondary">Clear Completed</button>
+                    </div>
+                </header>
+                <div class="tasks-input-container">
+                    <input type="text" id="new-task-input" placeholder="What needs to be done? Press Enter...">
+                </div>
+                <div id="tasks-list" class="tasks-list"></div>
+            </section>
+
+            <!-- Habits View -->
+            <section id="habits-view" class="view-section">
+                <header class="view-header">
+                    <div class="header-text">
+                        <h1>Habit Tracker</h1>
+                        <p>Build unshakeable consistency.</p>
+                    </div>
+                    <div class="header-actions">
+                         <button id="add-habit-btn" class="btn btn-primary">+ New Habit</button>
+                    </div>
+                </header>
+                <div class="habits-container" id="habits-list"></div>
+            </section>
+
+            <!-- Sounds View -->
+            <section id="sounds-view" class="view-section">
+                <header class="view-header">
+                    <div class="header-text">
+                        <h1>Ambient Focus Library</h1>
+                        <p>Total-coverage synthetic stress relief and infinite custom soundboards.</p>
+                    </div>
+                </header>
+                
+                <div class="custom-audio-importer">
+                    <input type="text" id="custom-audio-input" placeholder="Paste *any* YouTube link or direct MP3 URL here...">
+                    <button class="btn btn-primary" id="custom-audio-btn">Import Link</button>
+                </div>
+                <h2 style="margin-bottom: 1.5rem; font-size: 1.4rem; color: var(--text-secondary);">Your Custom Board</h2>
+                <div class="sounds-grid" id="custom-sounds-grid" style="margin-bottom: 3rem;"></div>
+
+                <h2 style="margin-bottom: 1.5rem; font-size: 1.4rem; color: var(--text-secondary);">Deep Focus (Masking)</h2>
+                <div class="sounds-grid" style="margin-bottom: 3rem;">
+                    <div class="sound-card synthetic-card" data-sound="brown">
+                        <div class="sound-header"><h3>Brown Noise</h3><button class="sound-toggle-btn btn btn-secondary">Play</button></div>
+                        <p>Deeper than white noise.</p>
+                        <input type="range" class="sound-volume" min="0" max="1" step="0.01" value="0.5">
+                    </div>
+                    <div class="sound-card synthetic-card" data-sound="pink">
+                        <div class="sound-header"><h3>Pink Noise</h3><button class="sound-toggle-btn btn btn-secondary">Play</button></div>
+                        <p>Balanced spectral density.</p>
+                        <input type="range" class="sound-volume" min="0" max="1" step="0.01" value="0.5">
+                    </div>
+                </div>
+
+                <h2 style="margin-bottom: 1.5rem; font-size: 1.4rem; color: var(--text-secondary);">Nature Soundscapes</h2>
+                <div class="sounds-grid" style="margin-bottom: 3rem;">
+                    <div class="sound-card synthetic-card" data-sound="ocean">
+                        <div class="sound-header"><h3>Ocean Waves</h3><button class="sound-toggle-btn btn btn-secondary">Play</button></div>
+                        <p>LFO modulated rolling waves.</p>
+                        <input type="range" class="sound-volume" min="0" max="1" step="0.01" value="0.4">
+                    </div>
+                    <div class="sound-card synthetic-card" data-sound="rain">
+                        <div class="sound-header"><h3>Heavy Rain</h3><button class="sound-toggle-btn btn btn-secondary">Play</button></div>
+                        <input type="range" class="sound-volume" min="0" max="1" step="0.01" value="0.4">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Zen/Breathe View -->
+            <section id="zen-view" class="view-section">
+                 <header class="view-header">
+                    <div class="header-text">
+                        <h1>Stress Relief</h1>
+                        <p>Regulate your nervous system with guided Box Breathing.</p>
+                    </div>
+                </header>
+                <div class="zen-container">
+                    <div class="breathe-circle" id="breathe-circle"><span class="breathe-text" id="breathe-text">Ready</span></div>
+                    <div class="zen-controls">
+                        <button id="zen-toggle-btn" class="btn btn-primary">Start Box Breathing</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- ES6 Modules Entry Point -->
+    <script type="module" src="js/app.js"></script>
+</body>
+</html>

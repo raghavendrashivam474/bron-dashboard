@@ -1,0 +1,102 @@
+.habits-container {
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 2rem;
+}
+
+.habit-row {
+    display: flex;
+    align-items: center;
+    background: rgba(43, 34, 29, 0.4);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    gap: 1.5rem;
+    transition: background 0.2s ease;
+}
+
+.habit-row:hover {
+    background: rgba(43, 34, 29, 0.8);
+}
+
+.habit-info {
+    flex: 1;
+    min-width: 200px;
+}
+
+.habit-title-input {
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    font-family: var(--font-stack);
+    font-size: 1.1rem;
+    font-weight: 500;
+    outline: none;
+    width: 100%;
+    margin-bottom: 0.2rem;
+}
+
+.habit-title-input::placeholder {
+    color: var(--border-color);
+}
+
+.habit-streak {
+    font-size: 0.85rem;
+    color: var(--accent-color);
+    font-weight: 600;
+}
+
+.habit-days {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.habit-day-box {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    border: 1px dashed var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    transition: all 0.2s ease;
+}
+
+.habit-day-box:hover {
+    border-color: var(--text-secondary);
+}
+
+.habit-day-box.completed {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+    color: var(--bg-color);
+    font-weight: 600;
+    box-shadow: 0 2px 10px rgba(217, 119, 67, 0.2);
+}
+
+.habit-day-box.today {
+    border: 2px solid var(--text-secondary);
+}
+
+.habit-del-btn {
+    background: transparent;
+    border: none;
+    color: transparent;
+    cursor: pointer;
+    font-size: 1.2rem;
+    width: 30px;
+    text-align: center;
+    transition: color 0.2s ease;
+}
+
+.habit-row:hover .habit-del-btn {
+    color: var(--border-color);
+}
+
+.habit-del-btn:hover {
+    color: #ff6b6b !important;
+}

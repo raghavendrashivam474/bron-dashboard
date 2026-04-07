@@ -1,0 +1,98 @@
+:root {
+    /* Cyber/Neon OS Variables */
+    --bg-color: #030305; /* Pitch black */
+    --surface-color: rgba(6, 20, 26, 0.6); /* Translucent tech blue */
+    --surface-solid: #06141a;
+    --border-color: rgba(0, 255, 255, 0.15); /* Dim Cyan */
+    --border-highlight: rgba(0, 255, 255, 0.8); /* Burning Cyan */
+    
+    --text-primary: #e0ffff;
+    --text-secondary: #4da6a6;
+    
+    --accent-color: #00ffff; /* Cyber Cyan */
+    --accent-glow: rgba(0, 255, 255, 0.5);
+    
+    --font-stack: 'Outfit', 'Courier New', monospace; /* Techy */
+    
+    /* Bento Box specific vars */
+    --bento-radius: 4px; /* Hard angular edges are futuristic */
+    --bento-blur: blur(8px);
+    --bento-shadow: 0 0 20px rgba(0, 255, 255, 0.05), inset 0 0 10px rgba(0, 255, 255, 0.05);
+
+    /* Note Palette Refined for Sci-Fi */
+    --note-bg-default: rgba(6, 20, 26, 0.8);
+    --note-bg-red: rgba(50, 10, 10, 0.8);
+    --note-bg-green: rgba(10, 40, 20, 0.8);
+    --note-bg-blue: rgba(10, 20, 50, 0.8);
+    --note-bg-yellow: rgba(50, 40, 0, 0.8);
+}
+
+body {
+    background: var(--bg-color);
+    background-image: 
+        linear-gradient(rgba(0, 255, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 255, 0.04) 1px, transparent 1px);
+    background-size: 40px 40px; /* Cyber Radar Grid */
+    background-attachment: fixed;
+    color: var(--text-primary);
+    font-family: var(--font-stack);
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    overflow: hidden; 
+}
+
+/* Global Premium Custom Scrollbars */
+::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+}
+::-webkit-scrollbar-track {
+    background: transparent; 
+}
+::-webkit-scrollbar-thumb {
+    background: var(--border-color); 
+    border-radius: 0px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-color); 
+}
+
+/* Futuristic Blocky Button Styling */
+.btn {
+    font-family: var(--font-stack);
+    padding: 0.6rem 1.2rem;
+    border-radius: 2px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.2s;
+    outline: none;
+    border: 1px solid transparent;
+}
+
+.btn-primary {
+    background: rgba(0, 255, 255, 0.1);
+    color: var(--accent-color);
+    border: 1px solid var(--accent-color);
+    box-shadow: 0 0 10px var(--accent-glow);
+}
+
+.btn-primary:hover {
+    background: var(--accent-color);
+    color: #000;
+    box-shadow: 0 0 25px var(--accent-glow);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+    color: var(--text-primary);
+    border-color: var(--accent-color);
+    background: rgba(0, 255, 255, 0.05);
+}
