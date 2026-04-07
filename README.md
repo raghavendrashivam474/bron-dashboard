@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # 🧠 Bron Dashboard — Cyber OS Productivity Hub
 
 A hyper-minimal productivity OS built with pure Vanilla JavaScript.
@@ -83,4 +82,3 @@ Because this app utilizes strict ES6 `import`/`export` logic, it will trigger CO
 - **Cyber Glitch / Terminal Typing**: A recursive JS charAt sequencer that manually outputs boot logs while simultaneously firing physical audio pings.
 - **Absolute 3D Parallax**: Maps physical `clientX`/`clientY` offsets against bounding box centers to trigger `rotateX` and `rotateY` manipulations inside `perspective: 1200px` contexts.
 - **Contextual Hover Orbits**: Renders absolute DOM modals on demand tracking bounding box hover events.
->>>>>>> fe055ae (Initial commit - Bron Dashboard)
