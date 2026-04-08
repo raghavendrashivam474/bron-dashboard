@@ -35,7 +35,7 @@
             <section id="notes-view" class="view-section">
                 <header class="view-header">
                     <div class="header-text">
-                        <h1>Quick Notes</h1>
+                        <h1>Notes</h1>
                     </div>
                     <div class="search-container">
                         <input type="text" id="search-input" placeholder="🔍 Search notes...">
@@ -52,7 +52,7 @@
             <section id="timer-view" class="view-section">
                 <header class="view-header">
                     <div class="header-text">
-                        <h1>Focus Timer</h1>
+                        <h1>Study Timer</h1>
                     </div>
                 </header>
                 <div id="timer-container" class="timer-container">
@@ -73,14 +73,21 @@
             <section id="tasks-view" class="view-section">
                 <header class="view-header">
                     <div class="header-text">
-                        <h1>Task Manager</h1>
+                        <h1>Assignments</h1>
                     </div>
                     <div class="header-actions">
                         <button id="clear-tasks-btn" class="btn btn-secondary">Clear Completed</button>
                     </div>
                 </header>
                 <div class="tasks-input-container">
-                    <input type="text" id="new-task-input" placeholder="What needs to be done? Press Enter...">
+                    <select id="new-task-subject" class="task-subject-select">
+                        <option value="General">Gen</option>
+                        <option value="Math">Math</option>
+                        <option value="Science">Sci</option>
+                        <option value="English">Eng</option>
+                        <option value="History">Hist</option>
+                    </select>
+                    <input type="text" id="new-task-input" placeholder="Add homework...">
                 </div>
                 <div id="tasks-list" class="tasks-list"></div>
             </section>
@@ -89,11 +96,11 @@
             <section id="habits-view" class="view-section">
                 <header class="view-header">
                     <div class="header-text">
-                        <h1>Habit Tracker</h1>
-                        <p>Build unshakeable consistency.</p>
+                        <h1>Streaks</h1>
+                        <p>Build strong daily habits.</p>
                     </div>
                     <div class="header-actions">
-                         <button id="add-habit-btn" class="btn btn-primary">+ New Habit</button>
+                         <button id="add-habit-btn" class="btn btn-primary">+ New Streak</button>
                     </div>
                 </header>
                 <div class="habits-container" id="habits-list"></div>
@@ -147,8 +154,8 @@
             <section id="zen-view" class="view-section">
                  <header class="view-header">
                     <div class="header-text">
-                        <h1>Stress Relief</h1>
-                        <p>Regulate your nervous system with guided Box Breathing.</p>
+                        <h1>Focus Reset</h1>
+                        <p>Take a break and regulate with Box Breathing.</p>
                     </div>
                 </header>
                 <div class="zen-container">

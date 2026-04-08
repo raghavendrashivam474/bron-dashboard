@@ -2,6 +2,7 @@ import { Storage } from '../core/storage.js';
 
 export function initTasks() {
     const taskInput = document.getElementById('new-task-input');
+    const taskSubject = document.getElementById('new-task-subject');
     const tasksList = document.getElementById('tasks-list');
     const clearBtn = document.getElementById('clear-tasks-btn');
     
@@ -25,6 +26,10 @@ export function initTasks() {
             checkbox.className = 'task-checkbox';
             checkbox.checked = task.completed;
             
+            const subjectTag = document.createElement('span');
+            subjectTag.className = `task-subject tag-${(task.subject || 'General').toLowerCase()}`;
+            subjectTag.textContent = task.subject || 'Gen';
+            
             const text = document.createElement('span');
             text.className = 'task-text';
             text.textContent = task.text;
@@ -47,6 +52,7 @@ export function initTasks() {
             });
 
             item.appendChild(checkbox);
+            item.appendChild(subjectTag);
             item.appendChild(text);
             item.appendChild(delBtn);
             
@@ -59,6 +65,7 @@ export function initTasks() {
             // Add new tasks to the beginning
             tasks.unshift({
                 text: taskInput.value.trim(),
+                subject: taskSubject ? taskSubject.value : 'General',
                 completed: false
             });
             taskInput.value = '';
