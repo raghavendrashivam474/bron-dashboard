@@ -233,6 +233,7 @@
 @media (max-width: 900px) {
     .student-dashboard-grid {
         grid-template-columns: 1fr;
+        grid-template-rows: auto;
         grid-template-areas:
             "header"
             "timer"
@@ -240,6 +241,44 @@
             "streaks"
             "notes"
             "focus";
+        padding: 16px 1rem;
+        gap: 16px;
+    }
+
+    .dashboard-header-inline {
+        flex-direction: column;
+        gap: 16px;
+        align-items: stretch;
+        padding-bottom: 0;
+    }
+
+    .dashboard-progress {
+        justify-content: space-between;
+    }
+
+    .progress-bar-container {
+        flex-grow: 1;
+        max-width: none;
+    }
+
+    .daily-goal-input {
+        min-width: 100%;
+    }
+
+    .summary-card {
+        padding: 20px;
+        height: auto;
+        min-height: 140px;
+    }
+
+    .hero-card .timer-quick-info {
+        font-size: 3.5rem;
+        margin: 1rem 0;
+    }
+
+    .hero-cta {
+        width: 100%;
+        margin-top: 1.5rem;
     }
 }
 

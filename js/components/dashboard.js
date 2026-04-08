@@ -31,12 +31,12 @@ export function initDashboard() {
         let assignmentsHTML = pendingCnt === 0 && tasks.length > 0
             ? `<div class="card-stats empty-state">All Clear ✨</div><p>Enjoy your break!</p>`
             : pendingCnt === 0 
-            ? `<div class="card-stats empty-state">0 Tasks</div><p>Add some assignments →</p>`
-            : `<div class="card-stats">${pendingCnt} Pending</div><p>Manage your assignments</p>`;
+            ? `<div class="card-stats empty-state">0 Tasks</div><p>Add some homework →</p>`
+            : `<div class="card-stats">${pendingCnt} Pending</div><p>Track your daily homework</p>`;
             
         let routinesHTML = totalRoutines === 0
-            ? `<div class="card-stats empty-state">New Routine</div><p>Start building consistency →</p>`
-            : `<div class="card-stats">${totalRoutines} Habits</div><p>Keep the momentum</p>`;
+            ? `<div class="card-stats empty-state">New Streak</div><p>Build your study streak →</p>`
+            : `<div class="card-stats">${totalRoutines} Streaks</div><p>Keep the momentum</p>`;
 
         let todaysGoal = Storage.get('bron_today_goal', '');
 
@@ -57,7 +57,7 @@ export function initDashboard() {
             
             <div class="summary-card hero-card" id="card-timer">
                 <div class="hero-content">
-                    <h3>Study Timer</h3>
+                    <h3>Study Session</h3>
                     <p>Start your next focused session</p>
                     <div class="timer-quick-info">25:00</div>
                     <button class="hero-cta btn btn-primary">Start Studying</button>
@@ -66,13 +66,13 @@ export function initDashboard() {
             </div>
 
             <div class="summary-card" id="card-homework">
-                <h3>Assignments</h3>
+                <h3>Homework</h3>
                 ${assignmentsHTML}
                 <div class="card-icon">📚</div>
             </div>
 
             <div class="summary-card" id="card-routine">
-                <h3>Streaks</h3>
+                <h3>Study Streak</h3>
                 ${routinesHTML}
                 <div class="card-icon">📈</div>
             </div>
@@ -84,7 +84,7 @@ export function initDashboard() {
             </div>
             
             <div class="summary-card" id="card-calm">
-                <h3>Focus Reset</h3>
+                <h3>Relax</h3>
                 <p>Take a deep breath</p>
                 <div class="card-icon">🧘</div>
             </div>

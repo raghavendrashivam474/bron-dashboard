@@ -77,11 +77,11 @@ export function initTasks() {
     clearBtn.addEventListener('click', () => {
         const hasCompleted = tasks.some(t => t.completed);
         if(!hasCompleted) {
-            alert('No completed tasks to clear.');
+            alert('No completed homework to clear.');
             return;
         }
         
-        if (confirm('Clear all completed tasks?')) {
+        if (confirm('Clear all completed homework?')) {
             tasks = tasks.filter(t => !t.completed);
             saveTasks();
             renderTasks();
