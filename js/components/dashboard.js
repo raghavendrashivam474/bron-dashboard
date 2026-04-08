@@ -17,26 +17,41 @@ export function initDashboard() {
         // Fetch Live States
         let tasks = Storage.get('bron_tasks', []);
         let pendingTasks = tasks.filter(t => !t.completed);
+        let completedTasks = tasks.filter(t => t.completed);
         let pendingCnt = pendingTasks.length; 
+        
+        let completionRate = tasks.length > 0 
+            ? Math.round((completedTasks.length / tasks.length) * 100) 
+            : 0;
 
         const habits = Storage.get('bron_habits', []);
-        let highestStreak = 0;
         let totalRoutines = habits.length;
-        habits.forEach(h => {
-             if(h.completedDays && h.completedDays.length >= highestStreak) {
-                 highestStreak = h.completedDays.length;
-             }
-        });
+
+        // Empty state conditional microcopy
+        let assignmentsHTML = pendingCnt === 0 && tasks.length > 0
+            ? `<div class="card-stats empty-state">All Clear ✨</div><p>Enjoy your break!</p>`
+            : pendingCnt === 0 
+            ? `<div class="card-stats empty-state">0 Tasks</div><p>Add some assignments →</p>`
+            : `<div class="card-stats">${pendingCnt} Pending</div><p>Manage your assignments</p>`;
+            
+        let routinesHTML = totalRoutines === 0
+            ? `<div class="card-stats empty-state">New Routine</div><p>Start building consistency →</p>`
+            : `<div class="card-stats">${totalRoutines} Habits</div><p>Keep the momentum</p>`;
+
+        let todaysGoal = Storage.get('bron_today_goal', '');
 
         dashContainer.innerHTML = `
             <div class="dashboard-header-inline">
                 <div class="dashboard-greeting">
                     <h2>Good Evening, Student</h2>
-                    <p>Ready to focus today?</p>
+                    <input type="text" id="daily-goal-input" class="daily-goal-input" placeholder="🎯 What is your main goal for today?" value="${todaysGoal}">
                 </div>
                 <div class="dashboard-progress">
-                    <div class="progress-label">Highest Streak</div>
-                    <div class="progress-value">${highestStreak} 🔥</div>
+                    <div class="progress-label">Daily Progress</div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar-fill" style="width: ${completionRate}%"></div>
+                    </div>
+                    <div class="progress-value">${completionRate}%</div>
                 </div>
             </div>
             
@@ -52,15 +67,13 @@ export function initDashboard() {
 
             <div class="summary-card" id="card-homework">
                 <h3>Assignments</h3>
-                <div class="card-stats">${pendingCnt} Pending</div>
-                <p>Manage your tasks</p>
+                ${assignmentsHTML}
                 <div class="card-icon">📚</div>
             </div>
 
             <div class="summary-card" id="card-routine">
                 <h3>Streaks</h3>
-                <div class="card-stats">${totalRoutines} Habits</div>
-                <p>Keep the momentum</p>
+                ${routinesHTML}
                 <div class="card-icon">📈</div>
             </div>
             
@@ -77,18 +90,22 @@ export function initDashboard() {
             </div>
         `;
 
+        // Event listeners for routing
         document.getElementById('card-timer').addEventListener('click', () => window.navigateToView('timer-view'));
         document.getElementById('card-homework').addEventListener('click', () => { window.navigateToView('tasks-view'); setTimeout(() => document.getElementById('new-task-input').focus(), 150); });
         document.getElementById('card-routine').addEventListener('click', () => window.navigateToView('habits-view'));
         document.getElementById('card-notes').addEventListener('click', () => window.navigateToView('notes-view'));
         document.getElementById('card-calm').addEventListener('click', () => window.navigateToView('zen-view'));
+
+        // Save daily goal 
+        const goalInput = document.getElementById('daily-goal-input');
+        if (goalInput) {
+            goalInput.addEventListener('input', (e) => {
+                Storage.set('bron_today_goal', e.target.value);
+            });
+        }
     }
 
-    // Since localStorage may get updated when returning to dashboard via ESC,
-    // we should re-render or at least listen for updates if necessary, 
-    // but just calling renderHUD() once works for initial load. We can hook it into navigation.
-    // Let's hook into the global navigation event if it existed...
-    // But right now just rendering once is what the old system implicitly did (actually old system had 'hudEnter' trigger only once).
     renderHUD();
 
     // Re-render when navigating back to update counts

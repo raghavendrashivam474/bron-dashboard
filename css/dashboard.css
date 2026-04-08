@@ -2,9 +2,15 @@
 
 .student-dashboard-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
-    padding: 1rem 2rem;
+    grid-template-columns: 1.15fr 1fr;
+    grid-template-rows: auto 1fr 1fr 1fr; /* Ensures cards are exact uniform heights */
+    grid-template-areas:
+        "header header"
+        "timer assignments"
+        "timer streaks"
+        "notes focus";
+    gap: 24px;
+    padding: 24px 2rem;
     max-width: 1200px;
     margin: 0 auto;
     animation: fadeIn 0.5s ease-out;
@@ -16,12 +22,12 @@
 }
 
 .dashboard-header-inline {
-    grid-column: 1 / -1;
+    grid-area: header;
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-    padding: 0.5rem 1rem;
+    align-items: flex-start;
+    margin-bottom: 0px;
+    padding: 0 0 12px 0;
 }
 
 .dashboard-greeting h2 {
@@ -35,8 +41,28 @@
     color: var(--text-secondary);
 }
 
+.daily-goal-input {
+    width: 100%;
+    min-width: 300px;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--border-highlight);
+    color: var(--text-primary);
+    padding: 0.4rem 0;
+    font-family: inherit;
+    font-size: 1.05rem;
+    outline: none;
+    transition: border-color 0.2s ease;
+    margin-top: 0.5rem;
+}
+.daily-goal-input:focus {
+    border-bottom-color: var(--accent-color);
+}
+    
 .dashboard-progress {
-    text-align: right;
+    display: flex;
+    align-items: center;
+    gap: 15px;
     background: rgba(0, 255, 255, 0.05);
     padding: 0.8rem 1.5rem;
     border-radius: 12px;
@@ -50,6 +76,22 @@
     letter-spacing: 1px;
 }
 
+.progress-bar-container {
+    width: 150px;
+    height: 8px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: inset 0 0 5px rgba(0,0,0,0.5);
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background: var(--accent-color);
+    box-shadow: 0 0 10px var(--accent-glow);
+    transition: width 0.5s ease-out;
+}
+
 .progress-value {
     font-size: 1.5rem;
     font-weight: bold;
@@ -57,17 +99,21 @@
 }
 
 .summary-card {
-    background: rgba(6, 20, 26, 0.6);
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border: 1px solid var(--border-highlight);
     border-radius: 10px;
-    padding: 1.5rem;
+    padding: 24px;
     position: relative;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     min-height: 160px;
-    backdrop-filter: blur(8px);
+    height: 100%;
+    box-sizing: border-box;
 }
 
 .summary-card:hover {
@@ -75,6 +121,16 @@
     border-color: var(--accent-color);
     box-shadow: 0 0 30px rgba(0, 255, 200, 0.2);
     background: rgba(0, 255, 255, 0.05);
+}
+
+.summary-card:active {
+    transform: translateY(1px) scale(0.98);
+    box-shadow: 0 0 10px rgba(0, 255, 200, 0.1);
+}
+
+.empty-state {
+    opacity: 0.6;
+    font-size: 1.8rem;
 }
 
 .summary-card h3 {
@@ -113,34 +169,47 @@
     transform: scale(1.1);
 }
 
+/* Card Grid Assignments */
+#card-homework { grid-area: assignments; }
+#card-routine { grid-area: streaks; }
+#card-notes { grid-area: notes; }
+#card-calm { grid-area: focus; }
+
 /* Hero Card priority styling */
 .hero-card {
-    grid-column: span 2;
-    grid-row: span 2;
+    grid-area: timer;
     background: linear-gradient(135deg, rgba(6, 20, 26, 0.9), rgba(0, 255, 255, 0.08));
     border: 1px solid var(--accent-color);
     box-shadow: 0 0 20px rgba(0, 255, 200, 0.08);
 }
 
+.hero-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+}
+
 .hero-card:hover {
     background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(0, 255, 255, 0.15));
-    box-shadow: 0 0 40px rgba(0, 255, 200, 0.25);
+    box-shadow: 0 0 25px rgba(0, 255, 200, 0.2);
 }
 
 .hero-card h3 {
     font-size: 2rem;
     color: var(--accent-color);
+    margin: 0;
 }
 
 .hero-card .timer-quick-info {
-    font-size: 4rem;
-    margin: 1rem 0;
+    font-size: 4.5rem;
+    margin: 1.5rem 0;
 }
 
 .hero-cta {
     margin-top: 1rem;
-    font-size: 1.2rem;
-    padding: 0.8rem 2rem;
+    font-size: 1.1rem;
+    padding: 0.7rem 1.8rem;
     border-radius: 8px;
     background: var(--accent-color);
     color: #000;
@@ -156,9 +225,21 @@
     box-shadow: 0 0 25px var(--accent-glow);
 }
 
-@media (max-width: 768px) {
-    .hero-card {
-        grid-column: 1 / -1;
+.hero-cta:active {
+    transform: scale(0.96);
+    box-shadow: 0 0 10px var(--accent-glow);
+}
+
+@media (max-width: 900px) {
+    .student-dashboard-grid {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "header"
+            "timer"
+            "assignments"
+            "streaks"
+            "notes"
+            "focus";
     }
 }
 
